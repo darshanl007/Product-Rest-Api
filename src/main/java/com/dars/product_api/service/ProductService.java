@@ -38,4 +38,21 @@ public class ProductService {
 		return new ResponseEntity<Object>(map, HttpStatus.CREATED);
 	}
 
+	public ResponseEntity<Object> fetchAllProducts() {
+		List<Product> list = repository.findAll();
+
+		if (list.isEmpty()) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("error", "No Products Found");
+
+			return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("message", "Products Found");
+			map.put("data", list);
+
+			return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+		}
+	}
+
 }
