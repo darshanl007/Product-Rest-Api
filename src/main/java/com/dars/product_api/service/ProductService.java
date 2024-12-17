@@ -3,6 +3,7 @@ package com.dars.product_api.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,22 @@ public class ProductService {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("message", "Products Found");
 			map.put("data", list);
+
+			return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+		}
+	}
+
+	public ResponseEntity<Object> fetchById(int id) {
+		Optional<Product> optional = repository.findById(id);
+		if (optional.isEmpty()) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("error", "No Product Found with Id: " + id);
+
+			return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("message", "Product Found");
+			map.put("data", optional.get());
 
 			return new ResponseEntity<Object>(map, HttpStatus.FOUND);
 		}

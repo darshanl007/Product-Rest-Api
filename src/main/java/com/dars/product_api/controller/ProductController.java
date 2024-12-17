@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,10 +32,17 @@ public class ProductController {
 	public ResponseEntity<Object> saveProducts(@RequestBody List<Product> products) {
 		return service.saveProducts(products);
 	}
-	
+
 	// Fetch all products
 	@GetMapping("/products")
-	public ResponseEntity<Object> fetchAllProducts(){
+	public ResponseEntity<Object> fetchAllProducts() {
 		return service.fetchAllProducts();
 	}
+
+	// Fetch Product By Id
+	@GetMapping("/products/{id}")
+	public ResponseEntity<Object> fetchById(@PathVariable int id) {
+		return service.fetchById(id);
+	}
+
 }
