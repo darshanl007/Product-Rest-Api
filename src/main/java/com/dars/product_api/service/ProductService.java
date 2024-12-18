@@ -72,4 +72,22 @@ public class ProductService {
 		}
 	}
 
+	public ResponseEntity<Object> fetchByName(String name) {
+		List<Product> list = repository.findByName(name);
+
+		if (list.isEmpty()) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("error", "No Products Found with Name: " + name);
+
+			return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("message", "Product Found");
+			map.put("data", list);
+
+			return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+		}
+
+	}
+
 }

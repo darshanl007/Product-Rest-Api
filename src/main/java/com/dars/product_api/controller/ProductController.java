@@ -45,4 +45,10 @@ public class ProductController {
 		return service.fetchById(id);
 	}
 
+	// Fetch Product By Name
+	@GetMapping("/products/name/{name}")
+	public ResponseEntity<Object> fetchByName(@PathVariable String name) {
+		return service.fetchByName(name);
+	}
+
 }
