@@ -124,4 +124,21 @@ public class ProductService {
 		}
 	}
 
+	public ResponseEntity<Object> deleteById(int id) {
+		Optional<Product> optional = repository.findById(id);
+
+		if (optional.isEmpty()) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("error", "No Product Found By Id :" + id);
+
+			return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			repository.deleteById(id);
+			map.put("message", "Product Deleted Success");
+
+			return new ResponseEntity<Object>(map, HttpStatus.OK);
+		}
+	}
+
 }

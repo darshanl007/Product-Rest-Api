@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +62,12 @@ public class ProductController {
 	@GetMapping("/products/stock/{min}/{max}")
 	public ResponseEntity<Object> fetchByStockBetween(@PathVariable int min, @PathVariable int max) {
 		return service.fetchByStockBetween(min, max);
+	}
+
+	// Delete Product By Id
+	@DeleteMapping("/products/{id}")
+	public ResponseEntity<Object> deleteById(@PathVariable int id) {
+		return service.deleteById(id);
 	}
 
 }
