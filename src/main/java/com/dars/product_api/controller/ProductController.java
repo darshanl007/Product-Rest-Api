@@ -57,4 +57,10 @@ public class ProductController {
 		return service.fetchByPriceGreater(price);
 	}
 
+	// Fetch Products By Stock Between
+	@GetMapping("/products/stock/{min}/{max}")
+	public ResponseEntity<Object> fetchByStockBetween(@PathVariable int min, @PathVariable int max) {
+		return service.fetchByStockBetween(min, max);
+	}
+
 }

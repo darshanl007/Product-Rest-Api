@@ -107,4 +107,21 @@ public class ProductService {
 		}
 	}
 
+	public ResponseEntity<Object> fetchByStockBetween(int min, int max) {
+		List<Product> list = repository.findByStockBetween(min, max);
+
+		if (list.isEmpty()) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("error", "No Products Found Stock Between : " + min + " and " + max);
+
+			return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("message", "Products Found");
+			map.put("data", list);
+
+			return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+		}
+	}
+
 }
