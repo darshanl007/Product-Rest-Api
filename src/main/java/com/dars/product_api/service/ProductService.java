@@ -90,4 +90,21 @@ public class ProductService {
 
 	}
 
+	public ResponseEntity<Object> fetchByPriceGreater(double price) {
+		List<Product> list = repository.findByPriceGreaterThanEqual(price);
+
+		if (list.isEmpty()) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("error", "No Products Found Price Greater Than: " + price);
+
+			return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("message", "Products Found");
+			map.put("data", list);
+
+			return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+		}
+	}
+
 }

@@ -51,4 +51,10 @@ public class ProductController {
 		return service.fetchByName(name);
 	}
 
+	// Fetch Product By Price Greater Than
+	@GetMapping("/products/greater/price/{price}")
+	public ResponseEntity<Object> fetchByPriceGreater(@PathVariable double price) {
+		return service.fetchByPriceGreater(price);
+	}
+
 }
